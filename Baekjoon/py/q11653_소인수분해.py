@@ -10,32 +10,10 @@ N의 소인수분해 결과를 한 줄에 하나씩 오름차순으로 출력한
 import sys,math
 
 N = int(sys.stdin.readline().rstrip())
-deci_list = [2,3,5] #default
-idx = 0
-
-def find_deci():
-    global deci_list
-    tmp_v = deci_list[-1]
-    while True:
-        tmp_v+=1
-        for dec in range(2,math.floor(math.sqrt(tmp_v))+1):
-            if tmp_v%dec == 0:
-                break
-            elif dec==math.floor(math.sqrt(tmp_v)):
-                deci_list.append(tmp_v)
-        if tmp_v == deci_list[-1]:
-            break
-           
+cnt = 2
 while N!=1:
-    N,remain = divmod(N,deci_list[idx])
-    if remain == 0:
-        print(deci_list[idx])
-        continue
-    elif remain !=0 :
-        N=N*deci_list[idx]+remain
-        remain = 0
-        idx+=1
-        if idx==len(deci_list)-1:
-            find_deci()
-    else :
-        break
+    if N%cnt == 0:
+        print(cnt)
+        N=N//cnt
+    else:
+        cnt+=1
