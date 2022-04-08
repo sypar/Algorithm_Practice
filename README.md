@@ -8,6 +8,23 @@ Algorithm Practice for Baekjoon, Programmers, using Python,C++
 2. DFS/BFS : 큐,스택 활용, 최단경로, 영역
 
 3. 정렬 : 선택정렬, 삽입정렬, 퀵정렬, 계수정렬
+    Stable Sort
+    list=[1, 7(1), 3, 5, 4, 7(2), 9 ]
+
+    이 리스트를 정렬했을 때
+    (1) list=[1, 3, 4, 5, 7(1), 7(2), 9
+    (2) list=[1, 3, 4, 5, 7(2), 7(1), 9
+
+    (1)처럼 나오면 안정(Stable) 정렬, (2)처럼 나오면 불안정(Unstable) 정렬이라고 한다.
+
+    즉, 정렬을 했을 때 중복된 값들의 순서가 변하지 않으면 안정(Stable) 정렬, 변하면 불안정(Unstable) 정렬인 것이다.
+
+    대표적인 알고리즘들
+    Stable Sorting 알고리즘은 다음과 같다:          Unstable Soring 알고리즘:
+    Insertion Sort                                  Selection sort
+    Merge Sort                                      Heap Sort
+    Bubble Sort                                     Shell Sort
+    Counting Sort                                   Quick Sort
 
 4. 이진탐색 
     - 순차탐색 : 데이터를 앞부터 하나씩 탐색
