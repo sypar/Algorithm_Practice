@@ -27,19 +27,44 @@
 C++14: 80ms
 Java: 292ms
 PyPy3: 1172ms
-
 '''
 import sys
 sudoku = [list(map(int,sys.stdin.readline().split())) for _ in range(9)]
 zeros = [(i,j) for i in range(9) for j in range(9) if sudoku[i][j]==0]
-
-def candidate():
+state = False
+def candidate(arr):
+    global sudoku
     candi = [1,2,3,4,5,6,7,8,9]
+    for idx in range(9):
+        if sudoku[arr[0]][idx] in candi:
+            candi.remove(sudoku[arr[0]][idx])
+        if sudoku[idx][arr[1]] in candi:
+            candi.remove(sudoku[idx][arr[1]])
 
+    for x in range(0,9,3):
+        for y in range(0,9,3):
+            if arr[0]>=x and arr[0]<x+3 and arr[1]>=y and arr[1]<y+3:
+                for rx in range(x,x+3):
+                    for ry in range(y,y+3):
+                        if sudoku[rx][ry] in candi:
+                            candi.remove(sudoku[rx][ry])
+                return candi
 def dfs(start):
-    global zeros,sudoku
+    global zeros,sudoku,state
     if start>=len(zeros):
+        for x in range(9):
+            for y in range(9):
+                if y !=8:
+                    print(sudoku[x][y],end=' ')
+                else:
+                    print(sudoku[x][y])
+        state = True
         return
-    arr = sudoku[start]
-
+    arr = zeros[start]
+    candi = candidate(arr)
+    for idx in range(len(candi)):
+        sudoku[arr[0]][arr[1]]=candi[idx]
+        dfs(start+1)
+        if state == False:
+            sudoku[arr[0]][arr[1]]=0
 dfs(0)
