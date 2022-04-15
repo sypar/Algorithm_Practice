@@ -27,3 +27,25 @@ i\j	1	2	3	4
 출력
 첫째 줄에 스타트 팀과 링크 팀의 능력치의 차이의 최솟값을 출력한다.
 '''
+from itertools import combinations
+import sys
+n = int(sys.stdin.readline().rstrip())
+arr = [list(map(int,sys.stdin.readline().split())) for _ in range(n)]
+index = [ i for i in range(n)]
+min = 10E9
+
+def teamscore(team1,team2):
+    global min
+    score = 0
+    for i in range((n//2)-1):
+        for j in range(i+1,n//2):
+            score += arr[team1[i]][team1[j]] + arr[team1[j]][team1[i]] - arr[team2[i]][team2[j]] - arr[team2[j]][team2[i]]
+    if abs(score)<min: min = abs(score)
+
+for i in combinations(index,n//2):
+    start_team = []
+    for val in i:
+        start_team.append(val)
+    link_team = [ i for i in index if i not in start_team]
+    teamscore(start_team,link_team)
+print(min)
