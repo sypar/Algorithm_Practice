@@ -30,6 +30,10 @@ for c1 in range(N-1,-1,-1):
             ldp[c1]=ldp[c2]
     ldp[c1]+=1
 
-maxi = 0
+max_val = ldp[0]
 for idx in range(N):
-    maxi = max()
+    if idx==N-1:
+        max_val = max(max_val,udp[idx])
+    elif arr[idx]>arr[idx+1]:
+        max_val = max(max_val,udp[idx]+ldp[idx]-1)
+print(max_val)
